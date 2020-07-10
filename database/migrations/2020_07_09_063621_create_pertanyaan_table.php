@@ -17,11 +17,8 @@ class CreatePertanyaanTable extends Migration
             $table->id();
             $table->text('judul');
             $table->text('isi');
-            $table->text('pertanyaan');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
-            $table->unsignedBigInteger('id_tag');
-            $table->foreign('id_tag')->references('id')->on('tag');
             $table->timestamps();
         });
     }
