@@ -8,18 +8,24 @@
     </div>
     <div class="card mt-4">
         <div class="card-body">
-            <form action="" method="">
+            <form action="/pertanyaan/edit/{{ $pertanyaan->id }}" method="POST">
+                @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="judul">Judul Pertanyaan:</label>
-                    <input type="text" class="form-control" id="judul" required>
+                    <input type="text" name="judul" value="{{ $pertanyaan->judul }}" class="form-control" id="judul" required>
                 </div>
                 <div class="form-group">
                     <label for="isi">Isi Pertanyaan:</label>
-                    <textarea class="form-control" rows="5" id="isi" required></textarea>
+                    <textarea class="form-control" name="isi" rows="5" id="isi" required>{{ $pertanyaan->isi }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="tags">Tags:</label>
-                    <input type="text" class="form-control" id="tags" required>
+                    <select name="tag[]" class="tokenizationSelect2 form-control" multiple="true" required>
+                        @foreach ($tags as $tag)
+                            <option value="{{ Str::lower($tag->nama_tag) }}">{{ Str::camel($tag->nama_tag) }}</option>                            
+                        @endforeach
+                    </select>
                 </div>
                 <button class="btn btn-primary">Submit</button>
             </form>
@@ -27,3 +33,14 @@
     </div>
 </div>
 @endsection
+@push('js-plus')
+<script>
+    $(document).ready(function(){
+        $(".tokenizationSelect2").select2({
+            placeholder: "type and press enter to make many tags", //placeholder
+            tags: true,
+            tokenSeparators: ['/',',',';'," "] 
+        });
+    })
+</script>
+@endpush

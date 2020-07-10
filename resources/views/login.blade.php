@@ -24,14 +24,20 @@
         </div>
         <div class="card mx-auto mt-4" style="width: 20rem;">
             <div class="card-body">
-                <form action="/">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <div class="form-group">
                         <label for="email">Nama Pengguna</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="pwd">Kata Sandi</label>
-                        <input type="password" class="form-control" id="pwd">
+                        <input type="password" name="password" class="form-control" id="pwd">
                     </div>
                     <button type="submit" class="form-control btn btn-success btn-sm" style="font-weight: 600 !important;">Masuk</button>
                 </form>
@@ -40,7 +46,7 @@
         <div class="card mx-auto mt-4" style="width: 20rem; background-color: #f9f9f9;">
             <div class="card-body text-center" style="font-size: 14px;">
                 Belum punya akun?
-                <a href="#">Buat akun</a>
+                <a href="{{ route('register') }}">Buat akun</a>
             </div>
         </div>
         <p class="text-secondary text-center mt-4 small">Copyright &copy; Copas 2020</p>

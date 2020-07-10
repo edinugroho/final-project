@@ -3,23 +3,36 @@
 @section('content')
     <div class="container mt-4">
         <h3 class="font-weight-normal">Daftar Pertanyaan <a href="/pertanyaan/create" class="btn btn-success btn-sm"><span class="fa fa-plus"></span> Tambah</a></h3>
-        <div class="card mt-4">
+        @foreach ($pertanyaans as $pertanyaan)   
+        <div class="card mt-2">
             <div class="card-body">
                 <h5 class="card-title">
-                    Pertanyaan
+                    {{ $pertanyaan->judul }}
                     <span class="fa fa-check-square-o text-success"></span>
                     <div class="float-right small">
-                        <a class="mr-2" href="">Laravel</a>
-                        <a class="mr-2" href="">PHP</a>
+                        @foreach ($pertanyaan->tag as $tag)
+                        <a class="mr-2" href="">{{ $tag->nama_tag }}</a>
+                        @endforeach
                     </div>
                 </h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, quos aliquam? Sint dignissimos distinctio voluptatibus hic reprehenderit maiores quia nemo veniam, aut voluptatum inventore necessitatibus magnam deserunt sapiente quisquam odio.</p>
+                <p class="card-text">{{ Str::limit($pertanyaan->isi,100,' ...') }}</p>
                 <a href="/pertanyaan">2 Responses</a>
-                <a href="/pertanyaan/edit" class="btn btn-primary btn-sm"><span class="fa fa-pencil-square-o"></span> Edit</a>
-                <button class="btn btn-danger btn-sm"><span class="fa fa-trash-o"></span> Hapus</button>
+                @auth
+                <div class="row ml-1 mt-2">
+                    @if ($pertanyaan->id_user==Auth::id())
+                        <a href="/pertanyaan/edit/{{ $pertanyaan->id }}" class="btn btn-primary btn-sm"><span class="fa fa-pencil-square-o"></span> Edit</a>
+                        <form action="{{ url('/pertanyaan/delete', ['id' => $pertanyaan->id]) }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="ml-1 btn btn-danger btn-sm"><span class="fa fa-trash-o"></span> Hapus</button>
+                        </form>
+                    @endif
+                </div>
+                @endauth
                 <p class="d-inline float-right font-italic small">Dibuat pada : 12-12-2012 12:00:00</p>
             </div>
         </div>
+        @endforeach
     </div>
 
     {{-- Pagination --}}
