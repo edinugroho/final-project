@@ -29,7 +29,7 @@
                     @endif
                 </div>
                 @endauth
-                <p class="d-inline float-right font-italic small">Dibuat pada : 12-12-2012 12:00:00</p>
+                <p class="d-inline float-right font-italic small">Created {{ $pertanyaan->created_at->diffForHumans() }}</p>
             </div>
         </div>
         @endforeach
@@ -38,16 +38,8 @@
     {{-- Pagination --}}
     <div class="container mt-4">
         <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
+            <ul class="pagination justify-content-center"> 
+	            {{ $pertanyaans->links() }}
             </ul>
         </nav>
     </div>

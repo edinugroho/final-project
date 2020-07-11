@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data['pertanyaans'] = Pertanyaan::all();
+        $data['pertanyaans'] = Pertanyaan::paginate(5);
         return view('index', $data);
     }
     public function profile()
