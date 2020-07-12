@@ -79,11 +79,11 @@
             </h5>
             <p class="card-text"> {{ $jawaban->jawaban }} </p>
             <div class="row border-bottom border-secondary pb-4">
-                <div class="col-md">
+                {{-- <div class="col-md">
                     <button class="btn btn-success"><span class="fa fa-angle-double-up"></span> Up Vote</button>
                     <button class="btn btn-danger"><span class="fa fa-angle-double-down"></span> Down Vote</button>
                     <button class="btn btn-primary">Vote</button>
-                </div>
+                </div> --}}
                 <div class="col-md">
                     <p class="d-inline float-right font-italic small">answered {{ $jawaban->created_at->diffForHumans() }}</p>
                 </div>
