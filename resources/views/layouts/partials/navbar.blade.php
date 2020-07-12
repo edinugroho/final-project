@@ -22,7 +22,11 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: 20px">Poin : 200</a>
+                    <a class="nav-link" href="#" style="font-size: 20px">
+                        @if (Auth::user()->reputasi != 0)
+                            Poin : {{ Auth::user()->reputasi }}
+                        @endif
+                    </a>
                 </li>
             </ul>
         </div>

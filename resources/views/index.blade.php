@@ -16,7 +16,7 @@
                     </div>
                 </h5>
                 <p class="card-text">{{ Str::limit($pertanyaan->isi,100,' ...') }}</p>
-                <a href="/pertanyaan">2 Responses</a>
+                <a href="/pertanyaan/{{ $pertanyaan->id }}">{{ $pertanyaan->jawaban->count() }} Responses</a>
                 @auth
                 <div class="row ml-1 mt-2">
                     @if ($pertanyaan->id_user==Auth::id())
